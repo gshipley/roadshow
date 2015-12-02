@@ -143,6 +143,7 @@ Pod:
 
 **Note:** If you used different credentials when you created your MongoDB Pod, ensure that you substitute them for the values above.
 **Note:** You will need to substitute the correct name for your MongoDB Pod.
+**Note:** For windows users, you will need to use a double quote for the above command to work: oc exec -tip mongodb-24-rhel7-1-73af9  -- bash -c "mongo -u mlbparks -p mlbparks mlbparks"
 
 Once you are connected to the database, run the following command to count the number of MLB teams added to the database:
 
