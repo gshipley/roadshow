@@ -2,42 +2,42 @@
 
 ###** Background: Routes **
 
-By default, the *new-app* command does not expose the Service it creates to the
-outside world. If you want expose a service as an HTTP endpoint you can easily
-do this with a Route. The OpenShift router uses the host HTTP header to
-determine where to proxy the incoming request. You can optionally define
-security, such as TLS, for the route. If you want your Pods to be accessible to
-the outside world, you need to create a route.
+By default, the `new-app` command does not expose the *Service* it creates to
+the outside world. If you want to expose a *Service* as an HTTP endpoint you can
+easily do this with a *Route*. The OpenShift router uses the HTTP header of the
+incoming request to determine where to proxy the incoming request. You can
+optionally define security, such as TLS, for the *Route*. If you want your
+*Services*, and, by extension, your *Pods*,  to be accessible to the outside
+world, you need to create a *Route*.
 
-####**Exercise 2: Creating a route**
+####**Exercise 2: Creating a Route**
 
-Fortunately, creating a Route is a pretty straight-forward process.  You simply
-expose the Service. First we want to verify that we don't already have any
+Fortunately, creating a *Route* is a pretty straight-forward process.  You simply
+`expose` the *Service*. First we want to verify that we don't already have any
 existing routes:
 
 	$ oc get routes
-    
-    NAME      HOST/PORT   PATH      SERVICE   LABELS
+        <no output>
 
-Now we need to get the Service name to expose:
+Now we need to get the *Service* name to expose:
 
 	$ oc get services
 
-    NAME        LABELS    SELECTOR                     IP(S)            PORT(S)
-    guestbook   <none>    deploymentconfig=guestbook   172.30.208.199   3000/TCP
+    NAME        CLUSTER_IP      EXTERNAL_IP   PORT(S)    SELECTOR                                   AGE
+    guestbook   172.30.83.194   <none>        3000/TCP   app=guestbook,deploymentconfig=guestbook   50s
 
-Once we know the Service name, creating a route is a simple one-command task:
+Once we know the *Service* name, creating a *Route* is a simple one-command task:
 
 	$ oc expose service guestbook
 
-Verify the route was created with the following command:
+Verify the *Route* was created with the following command:
 
 	$ oc get routes
 
-    NAME        HOST/PORT      
-    guestbook   guestbook.userXX-guestbook.cloudapps.test.openshift3roadshow.com
+    NAME        HOST/PORT                                                            PATH      SERVICE     LABELS          INSECURE POLICY   TLS TERMINATION
+    guestbook   guestbook-userXX-guestbook.cloudapps.31test.openshift3roadshow.com             guestbook   app=guestbook
 
-You can also verify the route by looking at the project in OpenShift web console:
+You can also verify the *Route* by looking at the project in the OpenShift web console:
 
 ![Route](http://training.runcloudrun.com/images/roadshow/route.png)
 

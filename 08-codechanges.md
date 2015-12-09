@@ -8,8 +8,11 @@ will be triggered on OpenShift. This allows for automated pipeline of
 code/build/deploy. 
 
 In the OpenShift web console, navigate to your *userXX-mlbparks* Project, and
-then click *Browse* and then *Builds*.  On this screen you will see the option
-to copy the GitHub webhook URL as shown in the following image:
+then mouse-over *Browse* and then *Builds*. Click the `openshift3mlbparks`
+build.
+
+On this screen you will see the option to copy the GitHub webhook URL as shown
+in the following image:
 
 ![Webhook](http://training.runcloudrun.com/images/roadshow/webhook1.png)
 
@@ -34,8 +37,8 @@ that you disable SSL verification and save your changes:
 ![Webhook](http://training.runcloudrun.com/images/roadshow/webhook4.png)
 
 Boom!  From now on, every time you commit new source code to your GitHub
-repository, a new build/deploy pipeline will occur inside of OpenShift.  Let's
-try this out.
+repository, a new build and deploy will occur inside of OpenShift.  Let's try
+this out.
 
 Navigate to the */src/main/webapp* directory in your GitHub project and then
 click on the *index.html* file.
@@ -57,7 +60,7 @@ To
 
 Click on Commit changes at the bottom of the screen.
 
-Once you have committed your changes, a build should almost instantaneously be
+Once you have committed your changes, a *Build* should almost instantaneously be
 triggered in OpenShift. Look at the *Builds* page in the web console, or run the
 following command to verify:
 
