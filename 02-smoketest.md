@@ -2,15 +2,22 @@
 
 ###** Command Line **
 
-The first thing we want to do to ensure that our *oc* command line tools was installed and successfully added to our path is login to the OpenShift Enterprise 3.0 environment that has been provided for this Roadshow session.  In order to login, we will use the *oc* command and then specify the server that we want to authenticate to.  Issue the following command:
+The first thing we want to do to ensure that our `oc` command line tools was
+installed and successfully added to our path is login to the OpenShift
+Enterprise 3.0 environment that has been provided for this Roadshow session.  In
+order to login, we will use the `oc` command and then specify the server that we
+want to authenticate to.  Issue the following command:
 
 	$ oc login openshift-master.CITYNAME.openshift3roadshow.com
     
-**Note:** Ensure that you replace *CITYNAME* with the correct hostname / city for your location.  This information was provided to you by the instructor of this workshop.
+**Note:** Ensure that you replace *CITYNAME* with the correct hostname / city
+for your location.  This information was provided to you by the instructor of
+this workshop.
 
-**Note:** After entering in the above command, you may be prompted to accept the security certificate
+**Note:** After entering in the above command, you may be prompted to accept the
+security certificate
 
-You should see the following output:
+You may see the following output:
 
 	The server uses a certificate signed by an unknown authority.
 	You can bypass the certificate check, but any data you send to the server could be intercepted by others.
@@ -23,18 +30,23 @@ by OpenShift. In a real-world scenario, either OpenShift's certificate would be
 signed by a standard CA (eg: Thawte, Verisign, StartSSL, etc.) or signed by a
 corporate-standard CA that you already have installed on your system.
 
-**Note:** On some versions of Microsoft Windows, you may get an error that the server has an invalid x.509 certificate.  If you receive this error, enter in the following command:
+**Note:** On some versions of Microsoft Windows, you may get an error that the
+server has an invalid x.509 certificate.  If you receive this error, enter in
+the following command:
 
 	$ oc login master.test.openshift3roadshow.com --insecure-skip-tls-verify=true
     
-Once you issue the *oc login* command, you will be prompted for the username and password combination for your user account.  This information was provided to you by the instructor of this workshop:
+Once you issue the `oc login` command, you will be prompted for the username and
+password combination for your user account.  This information was provided to
+you by the instructor of this workshop:
 
     Username: your_username
     Password: your_password
     
-Ensure that you replace *your_username* and *password* with the credentials provided to you.
+Ensure that you replace `your_username` and `password` with the credentials provided to you.
 
-Once you have authenticated to the OpenShift 3 server, you will see the following confirmation message:
+Once you have authenticated to the OpenShift 3 server, you will see the
+following confirmation message:
 
     Login successful.
     Using project "userXX-smoke".
@@ -44,7 +56,8 @@ Congratulations, you are now authenticated to the OpenShift server. The
 OpenShift master includes a built-in OAuth server. Developers and administrators
 obtain OAuth access tokens to authenticate themselves to the API.. By default
 your authorization token will last for 24 hours. There is more information about
-the login command and its configuration in the [OpenShift Enterprise Documentation](https://docs.openshift.com/enterprise/3.0/cli_reference/get_started_cli.html#basic-setup-and-login).
+the login command and its configuration in the [OpenShift Enterprise
+Documentation](https://docs.openshift.com/enterprise/3.1/cli_reference/get_started_cli.html#basic-setup-and-login).
 
     
 ###**Using a project**
@@ -75,7 +88,9 @@ You will see the following confirmation message:
 
 	Now using project "userXX-smoke" on server "https://openshift-master.CITYNAME.openshift3roadshow.com:8443".
 
-The next thing we want to check is the routes associated with this project. A simple explanation for how routes work is:
+The next thing we want to check is the routes associated with this project. A
+simple explanation for how routes work is:
+
 1. A request comes in to an OpenShift node on port 80 (HTTP) or 443 (HTTPS)
 1. A Docker container running the router is bound to those ports, and receives the request
 1. The router looks at the HTTP header for the host entry and matches it with a defined route
@@ -87,8 +102,8 @@ In order to view the routes for your *userXX-smoke* project, enter in the follow
     
 You should see output similar to the following:
 	
-    NAME      HOST/PORT                                                     PATH      SERVICE   LABELS      TLS TERMINATION
-    smoke     smoke.user36-smoke.cloudapps.chicago.openshift3roadshow.com             smoke     app=smoke 
+    NAME      HOST/PORT                                                    PATH      SERVICE   LABELS      INSECURE POLICY   TLS TERMINATION
+    smoke     smoke-userXX-smoke.cloudapps.CITYNAME.openshift3roadshow.com           smoke     app=smoke      
 
 ###**The Web Console**
 
@@ -119,13 +134,11 @@ two pods.
 
 ![Web Console](http://training.runcloudrun.com/images/roadshow/webconsole2.png)
 
-Once you have digested the information on the overview page, click on the Browse tab on the left hand side of the screen:
-
-![Web Console](http://training.runcloudrun.com/images/roadshow/webconsole3.png)
-
-Go ahead and play around a bit more with the web console to get familiar with
-the various tabs and options.  However, we will be using the command line tools
-for the majority of this lab.
+Once you have digested the information on the overview page, mouseover *Browse*
+tab on the left hand side of the screen, and explore the different menus. Play
+around a bit more with the web console to get familiar with the various tabs and
+options.  However, we will be using a mix of command line tooling and the web
+console for the labs.
 
 
 **End of Lab 2**

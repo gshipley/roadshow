@@ -2,26 +2,25 @@
 
 Most useful applications are "stateful" or "dynamic" in some way, and this is
 usually achieved with a database or other data storage. In this next lab we are
-going to add MongoDB to our *userXX-mlbparks* project and then rewire our
+going to add MongoDB to our `userXX-mlbparks` project and then rewire our
 application to talk to the database using environment variables.
 
-We are going to use the MongoDB Docker image produced by the OpenShift team -
-https://github.com/openshift/mongodb
+We are going to use the MongoDB image that is included with OpenShift, as listed
+on the [OpenShift
+Technologies](https://enterprise.openshift.com/features/#technologies) page.
 
-By default, this will use *EmptyDir* for data storage, which means if the Pod
+By default, this will use *EmptyDir* for data storage, which means if the *Pod*
 disappears the data does as well. In a real application you would use
-OpenShift's persistent volume mechanism with the database Pods to give them a
-place to store their data. 
-
-OpenShift is shipped with a number of application runtime and database templates
-that make things like this easy. We will cover templates at the end of the lab.
+OpenShift's persistent storage mechanism with the database *Pods* to give them a
+persistent place to store their data. 
 
 ###** Environment Variables **
-When we use the *new-app* command this time, we need to pass in some environment
-variables to be used inside the container. These environment variables are
-required to set the username, password, and name of the database. You can change
-the values of these environment variables to anything you would like.  The
-variables we are going to be setting are as follows:
+As you saw in the last lab, the web console makes it pretty easy to deploy
+application components as well. When we deploy the database, we need to pass in
+some environment variables to be used inside the container. These environment
+variables are required to set the username, password, and name of the database.
+You can change the values of these environment variables to anything you would
+like.  The variables we are going to be setting are as follows:
 
 - MONGODB_USER
 - MONGODB_PASSWORD
@@ -35,13 +34,27 @@ ensure that:
 - A user exists with the specified name
 - The user can access the specified database with the specified password
 
-Issue the following command:
+In the web console in your `userXX-mlbparks` project, again click the *"Add to
+Project"* button, and then find the `mongodb-ephemeral` template, and click it.
 
-	$ oc new-app mongodb -e MONGODB_USER=mlbparks -e MONGODB_PASSWORD=mlbparks -e MONGODB_DATABASE=mlbparks -e MONGODB_ADMIN_PASSWORD=mlbparks
+Your view on the next page is slightly different than before. Since this
+template requires several environment variables, they are predominantly
+displayed:
 
-Again you can use the web console or the oc command to watch the progress of this command.
+![MongoDB](http://training.runcloudrun.com/images/roadshow/mongodb-template.png)
 
-	$ oc get pods --watch
+You can see that some of the fields say *"generated if empty"*. This is a
+feature of *Templates* in OpenShift that will be covered in the next lab. For
+now, let's use the following values:
+
+* `MONGODB_USER` : `mlbparks`
+* `MONGODB_PASSWORD` : `mlbparks`
+* `MONGODB_DATABASE`: `mlbparks`
+* `MONGODB_ADMIN_PASSWORD` : `mlbparks`
+
+You can leave the rest of the values as their defaults, and then click
+*"Create"*. Then click *Continue to overview*. The MongoDB instance should
+quickly be deployed.
 
 ###**Wiring the JBoss EAP pod(s) to communicate with our MongoDB database**
 
@@ -49,20 +62,20 @@ When we initially created our JBoss EAP application, we provided no environment
 variables. The application is looking for a database, but can't find one, and it
 fails gracefully (you don't see an error).
 
-In order for our JBoss EAP Pod(s) to be able to connect to and use the MongoDB
+In order for our JBoss EAP *Pod*(s) to be able to connect to and use the MongoDB
 Pod that we just created, we need to wire them together by providing values for
-the environment variables to the EAP Pod(s).  In order to do this, we simply
-need to modify the DeploymentConfiguration.
+the environment variables to the EAP *Pod*(s).  In order to do this, we simply
+need to modify the *DeploymentConfiguration*.
 
 First, find the name of the DC:
 
 	$ oc get dc
 
-Then, use the *oc env* command to set environment variables directly on the DC:
+Then, use the `oc env` command to set environment variables directly on the DC:
 
 	$ oc env dc openshift3mlbparks -e MONGODB_USER=mlbparks -e MONGODB_PASSWORD=mlbparks -e MONGODB_DATABASE=mlbparks
 
-After you have modified the DeploymentConfig object, you can verify the environment variables have been added by viewing the JSON document of the configuration:
+After you have modified the *DeploymentConfig* object, you can verify the environment variables have been added by viewing the JSON document of the configuration:
 
 	$ oc get dc openshift3mlbparks -o json
 
@@ -84,17 +97,17 @@ You should see the following section:
 	],
 
 ###** OpenShift Magic **
-As soon as we set the environment variables on the DeploymentConfiguration, some
+As soon as we set the environment variables on the *DeploymentConfiguration*, some
 magic happened. OpenShift decided that this was a significant enough change to
-warrant updating the internal version number of the DeploymentConfiguration. You
-can verify this by looking at the output of *oc get dc*:
+warrant updating the internal version number of the *DeploymentConfiguration*. You
+can verify this by looking at the output of `oc get dc`:
 
     ...
     openshift3mlbparks   ConfigChange, ImageChange   2
 
-Something that increments the version of a DeploymentConfiguration, by default,
-causes a new deployment. You can verify this by looking at the output of *oc get
-rc*:
+Something that increments the version of a *DeploymentConfiguration*, by default,
+causes a new deployment. You can verify this by looking at the output of `oc get
+rc`:
 
     openshift3mlbparks-1   openshift3mlbparks ... 0
     openshift3mlbparks-2   openshift3mlbparks ... 1
@@ -105,7 +118,7 @@ our "old" application and stood up a "new" instance.
 
 If you refresh your application:
 
-    http://openshift3mlbparks.userXX-mlbparks.cloudapps.chicago.openshift3roadshow.com/
+    http://openshift3mlbparks-userXX-mlbparks.cloudapps.CITYNAME.openshift3roadshow.com/
 
 You'll notice that the ballparks suddenly are showing up. That's really cool!
 
@@ -122,26 +135,30 @@ In short summary: By referring to environment variables to connect to services
 lifecycle environments on OpenShift without having to modify application code.
 
 You can learn more about environment variables in the [environment
-variables](https://docs.openshift.com/enterprise/3.0/dev_guide/environment_variables.html)
+variables](https://docs.openshift.com/enterprise/3.1/dev_guide/environment_variables.html)
 section of the Developer Guide.
 
 ###**Using the Mongo command line shell in the container **
 
-To interact with our database we will use the *oc exec* command, which allows us
-to run arbitrary commands in our Pods. In this example we are going to use the
-bash shell and then invoke the mongo command while passing in the credentials
-needed to authenticate to the database. First, find the name of your MongoDB
-Pod:
+To interact with our database we will use the `oc exec` command, which allows us
+to run arbitrary commands in our *Pods*. If you are familiar with `docker exec`,
+the `oc` command essentially is proxying `docker exec` through the OpenShift API
+-- very slick! In this example we are going to use the `bash` shell that already
+exists in the MongoDB Docker image, and then invoke the `mongo` command while
+passing in the credentials needed to authenticate to the database. First, find
+the name of your MongoDB Pod:
 
     $ oc get pods
-    NAME                         READY     STATUS       RESTARTS   AGE
-    mongodb-24-rhel7-1-73af9     1/1       Running      0          13m
-    openshift3mlbparks-1-build   0/1       ExitCode:0   0          36m
-    openshift3mlbparks-2-qc9ug   1/1       Running      0          8m
+    NAME                         READY     STATUS      RESTARTS   AGE
+    mongodb-1-dkzsp              1/1       Running     0          10m
+    openshift3mlbparks-1-build   0/1       Completed   0          29m
+    openshift3mlbparks-2-mxs0r   1/1       Running     0          7m
 
-    $ oc exec -tip mongodb-24-rhel7-1-73af9  -- bash -c 'mongo -u mlbparks -p mlbparks mlbparks'
+    $ oc exec -ti mongodb-1-dkzsp -- bash -c 'mongo -u mlbparks -p mlbparks mlbparks'
 
-**Note:** If you used different credentials when you created your MongoDB Pod, ensure that you substitute them for the values above.
+**Note:** If you used different credentials when you created your MongoDB Pod,
+ensure that you substitute them for the values above.
+
 **Note:** You will need to substitute the correct name for your MongoDB Pod.
 
 Once you are connected to the database, run the following command to count the number of MLB teams added to the database:
@@ -151,5 +168,26 @@ Once you are connected to the database, run the following command to count the n
 You can also view the json documents with the following command:
 
 	> db.teams.find();
+
+###**OpenShift's Web Console Terminal**
+
+If you go back to the web console in your `userXX-mlbparks` *Project* and then
+mouse-over *"Browse"* and then select *Pods*, you'll be taken to the list of
+your pods. Click the MongoDB pod, and then click the tab labeled *Terminal*.
+
+OpenShift's web console gives you the ability to execute shell commands inside
+any of the *Pods* in your *Project*. 
+
+In the terminal for your Mongo *Pod*, run the same `mongo` command from before:
+
+    mongo -u mlbparks -p mlbparks mlbparks
+
+Then you can issue the same `db.teams.count();` command from before, without
+having to use the CLI! This is seriously cool.
+
+**Note:** Don't forget to use the right user and password and database
+information.
+
+**Note:** You currently can't copy/paste into the terminal.
 
 **End of Lab 7**
