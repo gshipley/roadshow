@@ -8,7 +8,7 @@ Enterprise 3.0 environment that has been provided for this Roadshow session.  In
 order to login, we will use the `oc` command and then specify the server that we
 want to authenticate to.  Issue the following command:
 
-	$ oc login openshift-master.CITYNAME.openshift3roadshow.com
+	$ oc login openshift-master.CITYNAME.openshift3roadshow.com:443
     
 **Note:** Ensure that you replace *CITYNAME* with the correct hostname / city
 for your location.  This information was provided to you by the instructor of
@@ -86,7 +86,7 @@ can do this with the following command:
    
 You will see the following confirmation message:
 
-	Now using project "userXX-smoke" on server "https://openshift-master.CITYNAME.openshift3roadshow.com:8443".
+	Now using project "userXX-smoke" on server "https://openshift-master.CITYNAME.openshift3roadshow.com:443".
 
 The next thing we want to check is the routes associated with this project. A
 simple explanation for how routes work is:
@@ -111,7 +111,7 @@ OpenShift Enterprise 3 ships with a web-based console that will allow users to
 perform various tasks via a browser.  To get a feel for how the web console
 works, open your browser and go to the following URL:
 
-	https://openshift-master.CITYNAME.openshift3roadshow.com:8443
+	https://openshift-master.CITYNAME.openshift3roadshow.com
 
 The first screen you will see is the authentication screen.  Enter in the following credentials:
 
