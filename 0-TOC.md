@@ -6,7 +6,7 @@
 2. **[Smoke Testing the Environment](http://training.runcloudrun.com/roadshow/02-smoketest.md.html)**
 3. **[Deploying our First Docker Image](http://training.runcloudrun.com/roadshow/03-docker.md.html)**
 4. **[Creating Routes](http://training.runcloudrun.com/roadshow/04-routes.md.html)**
-5. **[Remote Operations](http://training.runcloudrun.com/roadshow/05-remote-ops.md.html)
+5. **[Remote Operations](http://training.runcloudrun.com/roadshow/05-remote-ops.md.html)**
 6. **[Scaling](http://training.runcloudrun.com/roadshow/06-scaling.md.html)**
 7. **[Deploying Java Code on JBoss](http://training.runcloudrun.com/roadshow/07-jboss.md.html)**
 8. **[Adding a Database (MongoDB)](http://training.runcloudrun.com/roadshow/08-databases.md.html)**
