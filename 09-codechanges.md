@@ -1,11 +1,11 @@
 #** Lab 8: Making Code Changes and using webhooks**
 
-###** Using GitHub Web Hooks **
+####**Exercise: Using GitHub Web Hooks**
 
 OpenShift 3 supports receiving webhooks from remote code repositories when code
 changes, including from GitHub. When a notification is received, a new build
 will be triggered on OpenShift. This allows for automated pipeline of
-code/build/deploy. 
+code/build/deploy.
 
 In the OpenShift web console, navigate to your *userXX-mlbparks* Project, and
 then mouse-over *Browse* and then *Builds*. Click the `openshift3mlbparks`
@@ -67,7 +67,7 @@ following command to verify:
 	$ oc get builds
 
 You should see that a new build is running:
-	
+
     NAME                   TYPE      STATUS     POD
     openshift3mlbparks-1   Source    Complete   openshift3mlbparks-1-build
     openshift3mlbparks-2   Source    Running    openshift3mlbparks-2-build
@@ -79,5 +79,39 @@ automatically deployed by viewing the application in your browser:
 ![Webhook](http://training.runcloudrun.com/images/roadshow/webhook6.png)
 
 Winning!
+
+####**Exercise: Rollback**
+
+OpenShift allows you to move between different versions of an application without
+the need to rebuild versions. Every version of the application exists as a Docker
+image in the Docker Registry in OpenShift. Using the *oc rollback* and *oc deploy*
+commands you can move back- or forward between various version of the application
+in the registry.
+
+In order to perform a rollback, you need to know the name of the *Deployment Config*
+which has deployed the application:
+    $ oc get dc
+
+The output will be similar to the following:
+
+    NAME       TRIGGERS                    LATEST
+    mlbparks   ConfigChange, ImageChange   2
+
+Now run the following command to rollback the latest code change:
+
+    $ oc rollback mlbparks
+
+    #3 rolled back to mlbparks-1
+    Warning: the following images triggers were disabled: mlbparks
+    You can re-enable them with: oc deploy mlbparks --enable-triggers -n demo
+
+Once the deploy is complete, verify that the page header is reverted to the
+original header by viewing the application in your browser.
+
+**Note:** Automatic deployment of new images are disabled as part of the rollback
+to prevent unwanted deployments soon after the rollback is complete. To re-enable
+the automatic deployments run this:
+
+    $ oc deploy mlbparks --enable-triggers
 
 **End of Lab 8**
