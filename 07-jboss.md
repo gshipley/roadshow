@@ -1,4 +1,4 @@
-#** Lab 6: Deploying Java Code on JBoss**
+#** Lab 7: Deploying Java Code on JBoss**
 
 ###** Background: Source-to-Image (S2I) **
 
@@ -27,7 +27,7 @@ A full discussion of S2I is beyond the scope of this class, but you can find
 more information abuot it either in the [OpenShift S2I
 documentation](https://docs.openshift.com/enterprise/3.1/creating_images/s2i.html#overview)
 or on GitHub (following the link above). The only key concept you need to
-remember about S2I is that it's magic. 
+remember about S2I is that it's magic.
 
 For a current list of supported runtimes, you can check out the [OpenShift
 Technologies](https://enterprise.openshift.com/features/#technologies) page.
@@ -56,7 +56,7 @@ You should see the following output:
 
 OpenShift can work with Git repositories on GitHub. You can even register
 webhooks to initiate OpenShift builds triggered by any update to the application
-code on GitHub. 
+code on GitHub.
 
 The repository that we are going to fork is located at the following URL:
 
@@ -78,7 +78,7 @@ While the `new-app` command makes it very easy to get OpenShift to build code
 from a GitHub repository into a Docker image, we can also use the web console to
 do the same thing -- it's not all command line and green screen where we're
 going! Now that you have your own GitHub repository let's use it with
-OpenShift's JBoss EAP S2I image. 
+OpenShift's JBoss EAP S2I image.
 
 In the OpenShift web console, find your `userXX-mlbparks` project, and then
 click the *"Add to Project"* button. You will see a number of runtimes that you
@@ -132,7 +132,7 @@ After the build has completed and successfully:
 * The S2I process will push the resulting Docker image to the internal OpenShift registry
 * The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
   will cause a new deployment to happen.
-* A *ReplicationController* (RC) will be spawned for this new deployment. 
+* A *ReplicationController* (RC) will be spawned for this new deployment.
 * The RC will detect no *Pods* are running and will cause one to be deployed, as
     our default replica count is just 1.
 
@@ -152,7 +152,7 @@ URL in the web console, or via the command line:
 Where you should see something like the following:
 
     NAME                 HOST/PORT                                                                    PATH      SERVICE              LABELS                   INSECURE POLICY   TLS TERMINATION
-    openshift3mlbparks   openshift3mlbparks-userXX-mlbparks.cloudapps.CITYNAME.openshift3roadshow.com           openshift3mlbparks   app=openshift3mlbparks 
+    openshift3mlbparks   openshift3mlbparks-userXX-mlbparks.cloudapps.CITYNAME.openshift3roadshow.com           openshift3mlbparks   app=openshift3mlbparks
 
 In the above example, the URL is:
 
@@ -168,4 +168,4 @@ because we haven't actually added a database to the application yet.  We will do
 that in the next lab. Congratulations on deploying your first application
 using S2I on the OpenShift 3 Platform!
 
-**End of Lab 6**
+**End of Lab 7**

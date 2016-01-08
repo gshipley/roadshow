@@ -1,4 +1,4 @@
-#** Lab 8: Making Code Changes and using webhooks**
+#** Lab 9: Making Code Changes and using webhooks**
 
 ####**Exercise: Using GitHub Web Hooks**
 
@@ -114,4 +114,4 @@ the automatic deployments run this:
 
     $ oc deploy mlbparks --enable-triggers
 
-**End of Lab 8**
+**End of Lab 9**
