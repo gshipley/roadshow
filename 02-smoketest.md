@@ -4,7 +4,7 @@
 
 The first thing we want to do to ensure that our `oc` command line tools was
 installed and successfully added to our path is login to the OpenShift
-Enterprise 3.0 environment that has been provided for this Roadshow session.  In
+Enterprise 3.x environment that has been provided for this Roadshow session.  In
 order to login, we will use the `oc` command and then specify the server that we
 want to authenticate to.  Issue the following command:
 
