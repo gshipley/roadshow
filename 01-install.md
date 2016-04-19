@@ -19,9 +19,9 @@ from any directory on the command line.
 The first thing we want to do is download the correct executable for your
 operating system as linked below:
 
-- [Microsoft Windows](http://repo.openshift3roadshow.com/clients/oc-3.1.0.4-windows.zip)
-- [Apple OS X](http://repo.openshift3roadshow.com/clients/oc-3.1.0.4-macosx.tar.gz)
-- [Linux](http://repo.openshift3roadshow.com/clients/oc-3.1.0.4-linux.tar.gz)
+- [Microsoft Windows](http://repo.openshift3roadshow.com/clients/oc-windows.zip)
+- [Apple OS X](http://repo.openshift3roadshow.com/clients/oc-macosx.tar.gz)
+- [Linux](http://repo.openshift3roadshow.com/clients/oc-linux.tar.gz)
 
 
 Once the file has been downloaded, you will need to extract the contents as it
@@ -53,13 +53,13 @@ file using file explorer and select to extract the contents.
 Open up a terminal window and change to the directory where you downloaded the
 file.  Once you are in the directory, enter in the following command:
 
-	$ tar zxvf oc-3.1.0.4-macosx.tar.gz
+	$ tar zxvf oc-macosx.tar.gz
 
 **Linux:**
 Open up a terminal window and change to the directory where you downloaded the
 file.  Once you are in the directory, enter in the following command:
 
-	$ tar zxvf oc-3.1.0.4-linux.tar.gz
+	$ tar zxvf oc-linux.tar.gz
 
 ####**Adding *oc* to your PATH**
 
@@ -98,9 +98,9 @@ out by printing the version of the oc command:
 
 	$ oc version
 
-You should see the following:
+You should see the following (or something similar):
 
-    oc v3.1.0.4-16-g112fcc4
+    oc v3.1.1.6-33-g81eabcc
     kubernetes v1.1.0-origin-1107-g4c8e6f4
 
 If you get an error message, you have not updated your path correctly.  If you
