@@ -1,4 +1,4 @@
-#** Lab 5: Scaling and Self Healing **
+#** Lab 6: Scaling and Self Healing **
 
 ###** Background: Deployment Configurations and Replication Controllers **
 
@@ -66,7 +66,7 @@ one *Pod* actually deployed (`status`). By changing the `spec`, we can tell Open
 that we desire a different number of *Pods*.
 
 Ultimately, OpenShift 3's autoscaling capability will involve monitoring the
-status of an "application" and then manipulating the RCs accordingly. 
+status of an "application" and then manipulating the RCs accordingly.
 
 You can learn more about the tech-preview CPU-based [Horizontal Pod Autoscaler
 here](https://docs.openshift.com/enterprise/3.1/dev_guide/pod_autoscaling.html)
@@ -81,14 +81,14 @@ To verify that we changed the number of replicas by modifying the RC object,
 issue the following command:
 
 	$ oc get rc
-    
+
     CONTROLLER    CONTAINER(S)   IMAGE(S)                                                                                       SELECTOR                                                          REPLICAS   AGE
     guestbook-1   guestbook      kubernetes/guestbook@sha256:a49fe18bb57c8eee16e2002987e041f5ae9b5b70ae7b3d49eb60e5c26b9c6bd0   app=guestbook,deployment=guestbook-1,deploymentconfig=guestbook   3          13m
 
 You can see that we now have 3 replicas.  Let's verify that with the `oc get pods` command:
 
 	$ oc get pods
-    
+
         NAME                READY     REASON    RESTARTS   AGE
         guestbook-1-a163w   1/1       Running   0          1m
         guestbook-1-jvm79   1/1       Running   0          1m
@@ -149,4 +149,4 @@ More information on liveness and readiness is available in the [Application
 Health](https://docs.openshift.com/enterprise/3.1/dev_guide/application_health.html)
 section of the documentation.
 
-**End of Lab 5**
+**End of Lab 6**

@@ -1,4 +1,4 @@
-#** Lab 9: Using Templates**
+#** Lab 10: Using Templates**
 
 Running all these individual commands can be tedious and error prone.
 Fortunately for you, all of this configuration can be put together into a single
@@ -78,4 +78,4 @@ resources for our *mlbparks* application.
 
     https://raw.githubusercontent.com/gshipley/openshift3mlbparks/master/mlbparks-template.json
 
-**End of Lab 9**
+**End of Lab 10**

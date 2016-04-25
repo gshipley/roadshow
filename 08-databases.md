@@ -1,4 +1,4 @@
-#** Lab 7: Adding a Database**
+#** Lab 8: Adding a Database**
 
 Most useful applications are "stateful" or "dynamic" in some way, and this is
 usually achieved with a database or other data storage. In this next lab we are
@@ -12,7 +12,7 @@ Technologies](https://enterprise.openshift.com/features/#technologies) page.
 By default, this will use *EmptyDir* for data storage, which means if the *Pod*
 disappears the data does as well. In a real application you would use
 OpenShift's persistent storage mechanism with the database *Pods* to give them a
-persistent place to store their data. 
+persistent place to store their data.
 
 ###** Environment Variables **
 As you saw in the last lab, the web console makes it pretty easy to deploy
@@ -176,7 +176,7 @@ mouse-over *"Browse"* and then select *Pods*, you'll be taken to the list of
 your pods. Click the MongoDB pod, and then click the tab labeled *Terminal*.
 
 OpenShift's web console gives you the ability to execute shell commands inside
-any of the *Pods* in your *Project*. 
+any of the *Pods* in your *Project*.
 
 In the terminal for your Mongo *Pod*, run the same `mongo` command from before:
 
@@ -190,4 +190,4 @@ information.
 
 **Note:** You currently can't copy/paste into the terminal.
 
-**End of Lab 7**
+**End of Lab 8**
