@@ -8,7 +8,7 @@ Enterprise 3.x environment that has been provided for this Roadshow session.  In
 order to login, we will use the `oc` command and then specify the server that we
 want to authenticate to.  Issue the following command:
 
-	$ oc login openshift-master.CITYNAME.openshift3roadshow.com:443
+	$ oc login openshift.CITYNAME.openshift3roadshow.com:443
     
 **Note:** Ensure that you replace *CITYNAME* with the correct hostname / city
 for your location.  This information was provided to you by the instructor of
